@@ -1,0 +1,1508 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d09">
+<title>LUCE NOTTURNA | Official Store</title>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+ --green:#a1ff59;
+ --dark:#080d09;
+ --panel:#111a13;
+ --muted:#91a091;
+ --white:#f4fff3;
+}
+
+* {
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+}
+
+body {
+ background:var(--dark);
+ color:var(--white);
+ font-family:'Rajdhani',sans-serif;
+ min-height:100vh;
+ overflow-x:hidden;
+}
+
+body::before {
+ content:"";
+ position:fixed;
+ inset:0;
+ background:
+ radial-gradient(circle at 10% 10%,#9dff541b,transparent 30%),
+ radial-gradient(circle at 90% 90%,#00ff7710,transparent 35%);
+ z-index:-2;
+ pointer-events:none;
+}
+
+.grid-bg {
+ position:fixed;
+ inset:0;
+ background-image:
+ linear-gradient(#ffffff08 1px,transparent 1px),
+ linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+ background-size:40px 40px;
+ z-index:-1;
+ pointer-events:none;
+}
+
+nav {
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:20px 7%;
+ border-bottom:1px solid #ffffff18;
+ background:#080d09eF;
+ backdrop-filter:blur(15px);
+ position:sticky;
+ top:0;
+ z-index:100;
+}
+
+.logo {
+ font-family:'Orbitron',sans-serif;
+ font-size:16px;
+ font-weight:800;
+ letter-spacing:1px;
+ cursor:pointer;
+}
+
+.logo span {color:var(--green)}
+
+.menu-btn {
+ background:#142019;
+ color:var(--green);
+ border:1px solid #9dff5440;
+ padding:9px 13px;
+ border-radius:7px;
+ cursor:pointer;
+}
+
+.page {
+ display:none;
+ animation:pageIn .5s ease;
+}
+
+.page.active {display:block}
+
+@keyframes pageIn {
+ from {opacity:0;transform:translateY(12px)}
+ to {opacity:1;transform:translateY(0)}
+}
+
+@keyframes glow {
+ 0%,100% {box-shadow:0 0 10px #9dff5420}
+ 50% {box-shadow:0 0 30px #9dff5460}
+}
+
+@keyframes spin {
+ to {transform:rotate(360deg)}
+}
+
+@keyframes pulse {
+ 0%,100% {opacity:.4;transform:scale(.9)}
+ 50% {opacity:1;transform:scale(1.1)}
+}
+
+@keyframes scanline {
+ 0% {top:10%}
+ 50% {top:90%}
+ 100% {top:10%}
+}
+
+@keyframes pop {
+ from {opacity:0;transform:scale(.8)}
+ to {opacity:1;transform:scale(1)}
+}
+
+@keyframes loadingDots {
+ 0%,100% {opacity:.2}
+ 50% {opacity:1}
+}
+
+/* HOME */
+
+.home {
+ max-width:1100px;
+ margin:auto;
+ padding:70px 20px 40px;
+}
+
+.hero {
+ text-align:center;
+ padding:55px 15px;
+}
+
+.tag {
+ display:inline-block;
+ color:var(--green);
+ border:1px solid #9dff5450;
+ border-radius:30px;
+ padding:7px 15px;
+ font-size:11px;
+ letter-spacing:3px;
+ margin-bottom:25px;
+}
+
+.hero h1 {
+ font-family:'Orbitron',sans-serif;
+ font-size:clamp(32px,8vw,65px);
+ line-height:1.3;
+ letter-spacing:2px;
+}
+
+.hero h1 span {
+ color:var(--green);
+ text-shadow:0 0 25px #9dff5445;
+}
+
+.hero p {
+ color:var(--muted);
+ margin:18px auto 30px;
+ font-size:18px;
+ max-width:500px;
+}
+
+.home-buttons {
+ display:flex;
+ justify-content:center;
+ gap:13px;
+ flex-wrap:wrap;
+}
+
+.btn {
+ border:none;
+ padding:15px 24px;
+ border-radius:8px;
+ font-family:'Orbitron',sans-serif;
+ font-size:11px;
+ letter-spacing:1px;
+ font-weight:bold;
+ cursor:pointer;
+ transition:.3s;
+}
+
+.btn-green {
+ background:var(--green);
+ color:#081009;
+}
+
+.btn-outline {
+ background:transparent;
+ color:var(--green);
+ border:1px solid var(--green);
+}
+
+.btn:hover {
+ transform:translateY(-3px);
+ box-shadow:0 0 22px #9dff5440;
+}
+
+.features {
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:15px;
+ margin-top:55px;
+}
+
+.feature {
+ background:#111a13;
+ border:1px solid #ffffff16;
+ padding:22px 12px;
+ border-radius:13px;
+ text-align:center;
+ transition:.3s;
+}
+
+.feature:hover {
+ border-color:var(--green);
+ transform:translateY(-5px);
+}
+
+.feature .symbol {
+ font-size:27px;
+ margin-bottom:12px;
+}
+
+.feature h3 {
+ color:var(--green);
+ font-family:'Orbitron',sans-serif;
+ font-size:11px;
+}
+
+.feature p {
+ color:var(--muted);
+ font-size:13px;
+ margin-top:8px;
+}
+
+/* SECTION */
+
+.section {
+ max-width:1050px;
+ margin:auto;
+ padding:50px 20px;
+}
+
+.section-title {
+ text-align:center;
+ margin-bottom:30px;
+}
+
+.section-title h1 {
+ font-family:'Orbitron',sans-serif;
+ font-size:clamp(24px,6vw,38px);
+}
+
+.section-title h1 span {color:var(--green)}
+
+.section-title p {
+ color:var(--muted);
+ margin-top:10px;
+}
+
+/* SHOP */
+
+.product-detail {
+ background:#111a13;
+ border:1px solid #9dff5440;
+ border-radius:16px;
+ overflow:hidden;
+ max-width:650px;
+ margin:auto;
+}
+
+.product-photo {
+ background:#fff;
+ padding:10px;
+}
+
+.product-photo img {
+ width:100%;
+ display:block;
+ object-fit:contain;
+}
+
+.product-details {padding:22px}
+
+.product-details h2 {
+ font-family:'Orbitron',sans-serif;
+ font-size:18px;
+ margin-bottom:10px;
+}
+
+.product-price {
+ color:var(--green);
+ font-family:'Orbitron',sans-serif;
+ font-size:22px;
+ margin:15px 0;
+}
+
+.product-label {
+ display:block;
+ color:var(--green);
+ font-size:14px;
+ margin:17px 0 8px;
+}
+
+.product-select,.product-input {
+ width:100%;
+ padding:13px;
+ background:#080d09;
+ border:1px solid #405644;
+ border-radius:8px;
+ color:white;
+ outline:none;
+ font-family:inherit;
+ font-size:15px;
+ margin-top:8px;
+}
+
+.product-select:focus,.product-input:focus {
+ border-color:var(--green);
+}
+
+.order-total {
+ background:#17251a;
+ border:1px solid #9dff5440;
+ padding:16px;
+ border-radius:10px;
+ margin-top:20px;
+}
+
+.order-total div {
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+
+.order-total strong {
+ color:var(--green);
+ font-family:'Orbitron',sans-serif;
+ font-size:17px;
+}
+
+.buy-whatsapp {
+ width:100%;
+ margin-top:18px;
+ padding:16px;
+ background:var(--green);
+ color:#071009;
+ border:none;
+ border-radius:8px;
+ font-family:'Orbitron',sans-serif;
+ font-weight:bold;
+ cursor:pointer;
+}
+
+/* SCANNER */
+
+.scanner-container {
+ max-width:520px;
+ margin:auto;
+ padding:40px 18px;
+}
+
+.scanner-card {
+ background:linear-gradient(145deg,#142219,#0a100c);
+ border:1px solid #9dff5440;
+ border-radius:18px;
+ padding:20px;
+ box-shadow:0 15px 40px #0008;
+}
+
+.camera-box {
+ position:relative;
+ background:#050806;
+ border:1px solid #9dff5445;
+ border-radius:12px;
+ padding:10px;
+ overflow:hidden;
+}
+
+#reader {
+ width:100%;
+ min-height:240px;
+}
+
+#reader video {border-radius:8px}
+
+#reader__dashboard button,
+#reader__dashboard select {
+ background:var(--green)!important;
+ color:#071009!important;
+ border:0!important;
+ padding:7px!important;
+ border-radius:6px!important;
+}
+
+#reader a {color:var(--green)!important}
+
+.laser {
+ position:absolute;
+ z-index:5;
+ left:10%;
+ right:10%;
+ top:10%;
+ height:2px;
+ background:var(--green);
+ box-shadow:0 0 15px var(--green);
+ opacity:0;
+ pointer-events:none;
+}
+
+.camera-box.scanning .laser {
+ opacity:1;
+ animation:scanline 2s infinite;
+}
+
+.hint {
+ text-align:center;
+ color:var(--muted);
+ margin:15px 0;
+}
+
+.scanner-card>.btn {
+ width:100%;
+ margin-top:10px;
+}
+
+/* STEP SYSTEM */
+
+.step {
+ display:none;
+ margin-top:20px;
+ animation:pageIn .5s ease;
+}
+
+.step.active {display:block}
+
+.step-heading {
+ text-align:center;
+ margin-bottom:20px;
+}
+
+.step-heading h2 {
+ font-family:'Orbitron',sans-serif;
+ font-size:17px;
+ color:var(--green);
+}
+
+.step-heading p {
+ color:var(--muted);
+ margin-top:8px;
+ font-size:14px;
+}
+
+.confirm-group {
+ margin-top:20px;
+}
+
+.confirm-label {
+ display:block;
+ color:white;
+ font-weight:bold;
+ margin-bottom:10px;
+ font-size:15px;
+}
+
+.choice-grid {
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.choice {
+ position:relative;
+}
+
+.choice input {
+ position:absolute;
+ opacity:0;
+}
+
+.choice label {
+ display:block;
+ padding:17px 8px;
+ text-align:center;
+ background:#080d09;
+ border:1px solid #405644;
+ border-radius:9px;
+ cursor:pointer;
+ transition:.25s;
+ font-size:15px;
+}
+
+.choice input:checked+label {
+ background:#203820;
+ border-color:var(--green);
+ color:var(--green);
+ box-shadow:0 0 15px #9dff5420;
+}
+
+.step-btn {
+ width:100%;
+ margin-top:22px;
+}
+
+/* PROCESSING */
+
+.processing {
+ display:none;
+ text-align:center;
+ padding:35px 10px;
+ animation:pop .4s ease;
+}
+
+.processing.active {display:block}
+
+.loader-ring {
+ width:75px;
+ height:75px;
+ border:4px solid #273b2a;
+ border-top:4px solid var(--green);
+ border-radius:50%;
+ margin:0 auto 23px;
+ animation:spin 1s linear infinite;
+ box-shadow:0 0 20px #9dff5420;
+}
+
+.processing h2 {
+ font-family:'Orbitron',sans-serif;
+ font-size:17px;
+ color:var(--green);
+ margin-bottom:10px;
+}
+
+.processing p {
+ color:var(--muted);
+ font-size:14px;
+}
+
+.dots span {
+ display:inline-block;
+ animation:loadingDots 1s infinite;
+ font-size:25px;
+ color:var(--green);
+}
+
+.dots span:nth-child(2) {animation-delay:.2s}
+.dots span:nth-child(3) {animation-delay:.4s}
+
+/* RESULT */
+
+.result {
+ display:none;
+ margin-top:20px;
+ padding:25px 15px;
+ text-align:center;
+ border-radius:12px;
+ animation:pop .6s ease;
+}
+
+.result.success {
+ display:block;
+ background:#0d2819;
+ border:1px solid #36e989;
+ box-shadow:0 0 30px #36e98920;
+}
+
+.result.danger {
+ display:block;
+ background:#291313;
+ border:1px solid #ff4848;
+ box-shadow:0 0 30px #ff484820;
+}
+
+.result-icon {
+ width:75px;
+ height:75px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ border-radius:50%;
+ margin:0 auto 15px;
+ font-size:38px;
+ animation:pop .6s ease;
+}
+
+.success .result-icon {
+ background:#123c25;
+ color:#43f59a;
+}
+
+.danger .result-icon {
+ background:#461b1b;
+ color:#ff5555;
+}
+
+.result h2 {
+ font-family:'Orbitron',sans-serif;
+ font-size:23px;
+ margin:10px 0;
+}
+
+.success h2 {color:#43f59a}
+.danger h2 {color:#ff5555}
+
+.result p {
+ color:#c0cfc3;
+ font-size:14px;
+ line-height:1.6;
+}
+
+.result-info {
+ margin-top:15px;
+ padding-top:13px;
+ border-top:1px solid #ffffff20;
+ color:#a6b4a8;
+ font-size:13px;
+ line-height:1.8;
+}
+
+.result .btn {
+ width:100%;
+ margin-top:18px;
+}
+
+/* FOOTER */
+
+footer {
+ text-align:center;
+ padding:30px 10px;
+ border-top:1px solid #ffffff15;
+ color:#657367;
+ font-size:12px;
+ letter-spacing:2px;
+}
+
+footer span {color:var(--green)}
+
+@media(max-width:650px) {
+ .features {grid-template-columns:1fr}
+ .home {padding-top:35px}
+ .hero {padding:35px 5px}
+}
+
+@media(max-width:390px) {
+ nav {padding:17px 5%}
+ .logo {font-size:13px}
+ .choice-grid {gap:7px}
+ .choice label {font-size:13px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="grid-bg"></div>
+
+<nav>
+ <div class="logo" onclick="showPage('home')">
+  LUCE <span>NOTTURNA</span>
+ </div>
+ <button class="menu-btn" onclick="showPage('home')">
+  HOME
+ </button>
+</nav>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+ <div class="home">
+
+  <div class="hero">
+
+   <div class="tag">OFFICIAL STREETWEAR BRAND</div>
+
+   <h1>WEAR YOUR<br>
+    <span>IDENTITY.</span>
+   </h1>
+
+   <p>
+    Discover authentic products.
+    Experience the real LUCE NOTTURNA.
+   </p>
+
+   <div class="home-buttons">
+
+    <button class="btn btn-green"
+     onclick="showPage('check')">
+     CHECK AUTHENTIC
+    </button>
+
+    <button class="btn btn-outline"
+     onclick="showPage('shop')">
+     BUY AUTHENTIC
+    </button>
+
+   </div>
+
+  </div>
+
+  <div class="features">
+
+   <div class="feature">
+    <div class="symbol">⌕</div>
+    <h3>VERIFY</h3>
+    <p>Check your product authenticity.</p>
+   </div>
+
+   <div class="feature">
+    <div class="symbol">✦</div>
+    <h3>ORIGINAL</h3>
+    <p>Explore official collections.</p>
+   </div>
+
+   <div class="feature">
+    <div class="symbol">◈</div>
+    <h3>QUALITY</h3>
+    <p>Streetwear with identity.</p>
+   </div>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- SHOP -->
+
+<section id="shop" class="page">
+
+ <div class="section">
+
+  <div class="section-title">
+   <div class="tag">LUCE NOTTURNA COLLECTION</div>
+   <h1>OFFICIAL <span>SHOP.</span></h1>
+   <p>Wear your identity. Own the original.</p>
+  </div>
+
+  <div class="product-detail">
+
+   <div class="product-photo">
+    <img src="Tak berjudul7_20261109170100.png"
+     alt="LUCE NOTTURNA Signature Tee">
+   </div>
+
+   <div class="product-details">
+
+    <div class="tag">OFFICIAL RELEASE</div>
+
+    <h2>LCN SIGNATURE TEE</h2>
+
+    <p style="color:#91a091">
+     Premium streetwear · Black Edition
+    </p>
+
+    <div class="product-price">Rp130.000</div>
+
+    <label class="product-label">SELECT SIZE</label>
+
+    <select id="size" class="product-select">
+     <option value="">Choose your size</option>
+     <option value="M">M</option>
+     <option value="L">L</option>
+     <option value="XL">XL</option>
+    </select>
+
+    <label class="product-label">QUANTITY</label>
+
+    <input type="number" id="quantity"
+     class="product-input"
+     value="1" min="1" max="20"
+     oninput="calculateTotal()">
+
+    <h3 style="font-family:Orbitron;font-size:14px;margin-top:25px">
+     CUSTOMER INFORMATION
+    </h3>
+
+    <label class="product-label">FULL NAME</label>
+    <input type="text" id="customerName"
+     class="product-input"
+     placeholder="Masukkan nama lengkap">
+
+    <label class="product-label">PHONE NUMBER</label>
+    <input type="tel" id="customerPhone"
+     class="product-input"
+     placeholder="Masukkan nomor HP aktif">
+
+    <label class="product-label">HOME ADDRESS</label>
+    <textarea id="customerAddress"
+     class="product-input" rows="4"
+     placeholder="Masukkan alamat lengkap rumah"></textarea>
+
+    <div class="order-total">
+
+     <div>
+      <span>Price</span>
+      <span>Rp130.000</span>
+     </div>
+
+     <div style="margin-top:12px">
+      <span>Quantity</span>
+      <span id="quantityDisplay">1 pcs</span>
+     </div>
+
+     <hr style="border-color:#ffffff20;margin:15px 0">
+
+     <div>
+      <strong>TOTAL AKHIR</strong>
+      <strong id="finalTotal">Rp150.000</strong>
+     </div>
+
+     <p style="font-size:12px;color:#91a091;margin-top:12px">
+      Total belum termasuk ongkos kirim.
+     </p>
+
+    </div>
+
+    <button class="buy-whatsapp"
+     onclick="orderWhatsApp()">
+     ORDER VIA WHATSAPP
+    </button>
+
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- CHECK AUTHENTIC -->
+
+<section id="check" class="page">
+
+ <div class="scanner-container">
+
+  <div class="section-title">
+   <div class="tag">PRODUCT SECURITY SYSTEM</div>
+   <h1>CHECK <span>AUTHENTIC.</span></h1>
+   <p>Verify your LUCE NOTTURNA product.</p>
+  </div>
+
+  <div class="scanner-card">
+
+   <!-- STEP 1 SCAN -->
+
+   <div id="scanStep" class="step active">
+
+    <div class="step-heading">
+     <h2>01 / SCAN PRODUCT</h2>
+     <p>Scan the QR code attached to your product.</p>
+    </div>
+
+    <div class="camera-box" id="cameraBox">
+     <div class="laser"></div>
+     <div id="reader"></div>
+    </div>
+
+    <p class="hint" id="hint">
+     Camera is ready to scan.
+    </p>
+
+    <button class="btn btn-green"
+     onclick="startScanner()"
+     style="width:100%">
+     START SCANNING
+    </button>
+
+   </div>
+
+   <!-- STEP 2 CONFIRMATION -->
+
+   <div id="confirmStep" class="step">
+
+    <div class="step-heading">
+     <h2>02 / PRODUCT CONFIRMATION</h2>
+     <p>QR code successfully detected. Please complete the confirmation below.</p>
+    </div>
+
+    <div style="
+     background:#14271a;
+     border:1px solid #9dff5450;
+     padding:15px;
+     border-radius:10px;
+     text-align:center;
+     color:#a1ff59;
+     margin-bottom:20px">
+     ✓ QR CODE SUCCESSFULLY SCANNED
+    </div>
+
+    <div class="confirm-group">
+
+     <label class="confirm-label">
+      When did you purchase this product?
+     </label>
+
+     <div class="choice-grid">
+
+      <div class="choice">
+       <input type="radio" name="purchase"
+        id="before" value="Sebelum membeli">
+       <label for="before">BEFORE BUYING</label>
+      </div>
+
+      <div class="choice">
+       <input type="radio" name="purchase"
+        id="after" value="Sesudah membeli">
+       <label for="after">AFTER BUYING</label>
+      </div>
+
+     </div>
+
+    </div>
+
+    <div class="confirm-group">
+
+     <label class="confirm-label">
+      Where did you purchase this product?
+     </label>
+
+     <div class="choice-grid">
+
+      <div class="choice">
+       <input type="radio" name="source"
+        id="store" value="Store">
+       <label for="store">STORE</label>
+      </div>
+
+      <div class="choice">
+       <input type="radio" name="source"
+        id="online" value="Online">
+       <label for="online">ONLINE</label>
+      </div>
+
+     </div>
+
+    </div>
+
+    <button class="btn btn-green step-btn"
+     onclick="startVerification()">
+     CHECK AUTHENTICITY
+    </button>
+
+    <button class="btn btn-outline step-btn"
+     onclick="backToScan()">
+     SCAN AGAIN
+    </button>
+
+   </div>
+
+   <!-- STEP 3 PROCESSING -->
+
+   <div id="processingStep" class="processing">
+
+    <div class="loader-ring"></div>
+
+    <h2 id="processTitle">VERIFYING PRODUCT</h2>
+
+    <p id="processMessage">
+     Checking product database...
+    </p>
+
+    <div class="dots">
+     <span>.</span><span>.</span><span>.</span>
+    </div>
+
+   </div>
+
+   <!-- STEP 4 RESULT -->
+
+   <div class="result" id="result">
+
+    <div class="result-icon" id="resultIcon"></div>
+
+    <h2 id="resultTitle"></h2>
+
+    <p id="resultMessage"></p>
+
+    <div class="result-info" id="resultInfo"></div>
+
+    <button class="btn btn-green"
+     id="openBtn"
+     style="display:none"
+     onclick="openOfficial()">
+     OPEN OFFICIAL WEBSITE
+    </button>
+
+    <button class="btn btn-outline"
+     onclick="resetScanner()">
+     CHECK ANOTHER PRODUCT
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+</section>
+
+
+<footer>
+ LUCE NOTTURNA <span>®</span><br><br>
+ OFFICIAL STORE © 2026
+</footer>
+
+
+<script>
+
+// ==================================
+// NAVIGATION
+// ==================================
+
+function showPage(page) {
+
+ document.querySelectorAll('.page').forEach(p=>{
+  p.classList.remove('active');
+ });
+
+ document.getElementById(page).classList.add('active');
+
+ if(page==="check") {
+  setTimeout(startScanner,300);
+ } else {
+  stopScanner();
+ }
+
+ window.scrollTo({top:0,behavior:'smooth'});
+
+}
+
+
+// ==================================
+// SHOP
+// ==================================
+
+const PRODUCT_PRICE = 150000;
+const PRODUCT_NAME = "LCN Signature Tee";
+const ADMIN_WA = "6285695255370";
+
+function rupiah(value) {
+ return "Rp"+value.toLocaleString("id-ID");
+}
+
+function calculateTotal() {
+
+ let quantity = parseInt(
+  document.getElementById("quantity").value
+ );
+
+ if(!Number.isFinite(quantity) || quantity<1) {
+  quantity=1;
+ }
+
+ if(quantity>20) quantity=20;
+
+ document.getElementById("quantity").value=quantity;
+
+ document.getElementById("quantityDisplay").innerText=
+  quantity+" pcs";
+
+ document.getElementById("finalTotal").innerText=
+  rupiah(PRODUCT_PRICE*quantity);
+
+}
+
+function orderWhatsApp() {
+
+ const size=document.getElementById("size").value;
+ const quantity=parseInt(document.getElementById("quantity").value);
+ const name=document.getElementById("customerName").value.trim();
+ const phone=document.getElementById("customerPhone").value.trim();
+ const address=document.getElementById("customerAddress").value.trim();
+
+ if(!size) {
+  alert("Pilih ukuran M, L, atau XL!");
+  return;
+ }
+
+ if(!name) {
+  alert("Nama wajib diisi!");
+  return;
+ }
+
+ if(!/^[0-9+\-\s]{8,20}$/.test(phone)) {
+  alert("Nomor HP tidak valid!");
+  return;
+ }
+
+ if(!address) {
+  alert("Alamat wajib diisi!");
+  return;
+ }
+
+ if(!Number.isInteger(quantity)||quantity<1||quantity>20) {
+  alert("Jumlah pembelian tidak valid!");
+  return;
+ }
+
+ const total=PRODUCT_PRICE*quantity;
+
+ const message=
+`HALO ADMIN LUCE NOTTURNA!
+
+Saya ingin membeli produk berikut.
+
+========== DETAIL ORDER ==========
+
+Produk: ${PRODUCT_NAME}
+Ukuran: ${size}
+Jumlah: ${quantity} pcs
+Harga: ${rupiah(PRODUCT_PRICE)}
+Total akhir: ${rupiah(total)}
+
+========== DATA PEMBELI ==========
+
+Nama: ${name}
+Nomor HP: ${phone}
+Alamat:
+${address}
+
+Mohon konfirmasi stok dan ongkos kirim.
+
+Terima kasih!
+LUCE NOTTURNA CUSTOMER`;
+
+ const url="https://wa.me/"+ADMIN_WA+
+ "?text="+encodeURIComponent(message);
+
+ window.open(url,"_blank");
+
+}
+
+calculateTotal();
+
+
+// ==================================
+// OFFICIAL QR DATABASE
+// ==================================
+
+const trustedQRs = {
+
+ "https://www.canvaqr.com/RGVwKYATy-": {
+
+  name:"LUCE NOTTURNA",
+  serial:"LCN-ORIGINAL-001",
+  website:"https://www.canvaqr.com/RGVwKYATy-"
+
+ }
+
+};
+
+
+// ==================================
+// SCANNER SYSTEM
+// ==================================
+
+let scanner=null;
+let scanning=false;
+let scannedCode=null;
+let verifiedURL=null;
+let processing=false;
+
+async function startScanner() {
+
+ if(scanning) return;
+
+ if(typeof Html5Qrcode==="undefined") {
+  alert("Scanner gagal dimuat. Periksa koneksi internet.");
+  return;
+ }
+
+ if(!scanner) {
+  scanner=new Html5Qrcode("reader");
+ }
+
+ try {
+
+  document.getElementById("hint").innerText=
+   "Starting camera...";
+
+  await scanner.start(
+   {facingMode:"environment"},
+   {
+    fps:10,
+    qrbox:{width:220,height:220}
+   },
+   onScanSuccess,
+   ()=>{}
+  );
+
+  scanning=true;
+
+  document.getElementById("cameraBox")
+   .classList.add("scanning");
+
+  document.getElementById("hint").innerText=
+   "Scanning QR code...";
+
+ } catch(error) {
+
+  document.getElementById("hint").innerText=
+   "Camera unavailable.";
+
+  alert("Izinkan kamera dan gunakan website HTTPS atau localhost.");
+
+ }
+
+}
+
+
+// ==================================
+// STOP CAMERA
+// ==================================
+
+async function stopScanner() {
+
+ if(!scanning||!scanner) return;
+
+ try {
+
+  await scanner.stop();
+  scanning=false;
+
+  document.getElementById("cameraBox")
+   .classList.remove("scanning");
+
+ } catch(error) {
+  console.log(error);
+ }
+
+}
+
+
+// ==================================
+// SCAN SUCCESS
+// ==================================
+
+async function onScanSuccess(decodedText) {
+
+ if(processing||scannedCode) return;
+
+ processing=true;
+
+ scannedCode=decodedText;
+
+ await stopScanner();
+
+ // ANIMATION AFTER SCAN
+
+ showStep("processingStep");
+
+ document.getElementById("processTitle").innerText=
+  "READING QR CODE";
+
+ document.getElementById("processMessage").innerText=
+  "QR code successfully detected. Preparing confirmation...";
+
+ setTimeout(()=>{
+
+  showStep("confirmStep");
+  processing=false;
+
+ },1800);
+
+}
+
+
+// ==================================
+// STEP CONTROL
+// ==================================
+
+function showStep(id) {
+
+ document.querySelectorAll(".step").forEach(el=>{
+  el.classList.remove("active");
+ });
+
+ document.getElementById("processingStep")
+  .classList.remove("active");
+
+ document.getElementById("result").style.display="none";
+
+ const target=document.getElementById(id);
+
+ if(target) target.classList.add("active");
+
+}
+
+
+// ==================================
+// FINAL VERIFICATION
+// ==================================
+
+function startVerification() {
+
+ const purchase=document.querySelector(
+  'input[name="purchase"]:checked'
+ );
+
+ const source=document.querySelector(
+  'input[name="source"]:checked'
+ );
+
+ if(!scannedCode) {
+  alert("Scan QR code terlebih dahulu!");
+  return;
+ }
+
+ if(!purchase) {
+  alert("Pilih sebelum atau sesudah membeli!");
+  return;
+ }
+
+ if(!source) {
+  alert("Pilih Store atau Online!");
+  return;
+ }
+
+ const purchaseValue=purchase.value;
+ const sourceValue=source.value;
+
+ showStep("processingStep");
+
+ document.getElementById("processTitle").innerText=
+  "VERIFYING AUTHENTICITY";
+
+ document.getElementById("processMessage").innerText=
+  "Checking registered product database...";
+
+ // PROCESSING ANIMATION
+
+ setTimeout(()=>{
+
+  document.getElementById("processTitle").innerText=
+   "CHECKING SECURITY";
+
+  document.getElementById("processMessage").innerText=
+   "Confirming product registration...";
+
+ },1000);
+
+ setTimeout(()=>{
+
+  showResult(
+   scannedCode,
+   purchaseValue,
+   sourceValue
+  );
+
+ },2800);
+
+}
+
+
+// ==================================
+// SHOW AUTHENTIC / FAKE
+// ==================================
+
+function showResult(qrText,purchase,source) {
+
+ const result=document.getElementById("result");
+
+ const title=document.getElementById("resultTitle");
+
+ const message=document.getElementById("resultMessage");
+
+ const icon=document.getElementById("resultIcon");
+
+ const info=document.getElementById("resultInfo");
+
+ const openBtn=document.getElementById("openBtn");
+
+ const registered=trustedQRs[qrText];
+
+ result.className="result";
+ result.style.display="block";
+
+ openBtn.style.display="none";
+ verifiedURL=null;
+
+ if(registered) {
+
+  // AUTHENTIC
+
+  result.classList.add("success");
+
+  icon.innerHTML="✓";
+
+  title.innerHTML="AUTHENTIC";
+
+  message.innerHTML=
+   "Congratulations! Your QR code matches the registered LUCE NOTTURNA code.";
+
+  info.innerHTML=
+   "BRAND: "+registered.name+
+   "<br>SERIAL: "+registered.serial+
+   "<br>PURCHASE: "+purchase+
+   "<br>CHANNEL: "+source+
+   "<br>STATUS: ORIGINAL";
+
+  verifiedURL=registered.website;
+
+  openBtn.style.display="block";
+
+ } else {
+
+  // FAKE / NOT REGISTERED
+
+  result.classList.add("danger");
+
+  icon.innerHTML="✕";
+
+  title.innerHTML="FAKE / NOT VERIFIED";
+
+  message.innerHTML=
+   "This QR code is not registered in the LUCE NOTTURNA database.";
+
+  info.innerHTML=
+   "BRAND: UNKNOWN"+
+   "<br>PURCHASE: "+purchase+
+   "<br>CHANNEL: "+source+
+   "<br>STATUS: NOT VERIFIED";
+
+ }
+
+}
+
+
+// ==================================
+// OPEN OFFICIAL WEBSITE
+// ==================================
+
+function openOfficial() {
+
+ if(verifiedURL) {
+  window.open(verifiedURL,"_blank","noopener,noreferrer");
+ }
+
+}
+
+
+// ==================================
+// BACK TO SCAN
+// ==================================
+
+async function backToScan() {
+
+ scannedCode=null;
+ processing=false;
+
+ document.querySelectorAll(
+  'input[name="purchase"],input[name="source"]'
+ ).forEach(el=>el.checked=false);
+
+ showStep("scanStep");
+
+ document.getElementById("hint").innerText=
+  "Ready to scan QR code.";
+
+ startScanner();
+
+}
+
+
+// ==================================
+// RESET
+// ==================================
+
+async function resetScanner() {
+
+ await stopScanner();
+
+ scannedCode=null;
+ verifiedURL=null;
+ processing=false;
+
+ document.querySelectorAll(
+  'input[name="purchase"],input[name="source"]'
+ ).forEach(el=>el.checked=false);
+
+ showStep("scanStep");
+
+ document.getElementById("hint").innerText=
+  "Ready to scan another product.";
+
+ startScanner();
+
+}
+
+</script>
+
+</body>
+</html>
